@@ -71,10 +71,21 @@ $sql5 = "CREATE TABLE IF NOT EXISTS ekstrakurikuler (
     deleted_at TIMESTAMP NULL
 )";
 
+// Membuat tabel 'users' jika belum ada
+$sql6 = "CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL
+)";
+
 
 $koneksi->query($sql);
 $koneksi->query($sql2);
 $koneksi->query($sql3);
 $koneksi->query($sql4);
 $koneksi->query($sql5);
+$koneksi->query($sql6);
 ?>

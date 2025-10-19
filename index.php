@@ -1,5 +1,6 @@
 <?php
     include "config/koneksi.php";
+    include "controller/UserController.php";
     session_start();
 
     $error = '';
@@ -9,13 +10,11 @@
         $old['username'] = isset($_POST['username']) ? trim($_POST['username']) : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-        // Contoh validasi sederhana (gantikan dengan pengecekan DB Anda)
         if ($old['username'] === '' || $password === '') {
             $error = 'Username dan password harus diisi.';
         } else {
-            // contoh kredensial demo: admin / secret
-            if ($old['username'] === 'admin' && $password === 'secret') {
-                $_SESSION['user'] = $old['username'];
+            $userController = new UserController($koneksi);
+            if ($userController->login($old['username'], $password)) {
                 header('Location: dashboard.php');
                 exit;
             } else {
@@ -23,6 +22,7 @@
             }
         }
     }
+
 ?>
 <!doctype html>
 <html lang="id">
@@ -91,7 +91,6 @@
     <div class="wrap">
         <main class="card" role="main" aria-labelledby="login-title">
             <div class="brand">
-                <!-- <div class="logo">DS</div> -->
                 <div>
                     <h1 id="login-title">Masuk ke Data Sekolah</h1>
                     <p class="lead">Masukkan username dan password Anda untuk melanjutkan</p>
