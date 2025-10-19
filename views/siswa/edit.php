@@ -1,14 +1,15 @@
 <?php 
-include '../koneksi.php';
-$id = $_GET['id'];
-$data = mysqli_query($koneksi, "SELECT * FROM siswa WHERE id='$id'");
-$d = mysqli_fetch_array($data);
+    include '../../config/koneksi.php';
+    
+    $id = $_GET['id'];
+    $data = mysqli_query($koneksi, "SELECT * FROM siswa WHERE id='$id'");
+    $d = mysqli_fetch_array($data);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Edit Data Siswa</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
 <h2>Edit Data Siswa</h2>

@@ -1,9 +1,9 @@
-<?php include '../koneksi.php'; ?>
+<?php include '../../config/koneksi.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Tambah Siswa</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../asstes/style.css">
 </head>
 <body>
 <h2>Tambah Data Siswa</h2>

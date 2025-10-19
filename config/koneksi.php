@@ -49,7 +49,32 @@ $sql3 = "CREATE TABLE IF NOT EXISTS jurusan (
     deleted_at TIMESTAMP NULL
 )";
 
+// Membuat tabel 'mata_pelajaran' jika belum ada
+$sql4 = "CREATE TABLE IF NOT EXISTS mata_pelajaran (
+    id int AUTO_INCREMENT PRIMARY KEY,
+	nama_mapel VARCHAR (50),
+	kelas VARCHAR (10),
+	guru_pengajar VARCHAR (100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL
+)";
+
+// Membuat tabel 'ekstrakurikuler' jika belum ada
+$sql5 = "CREATE TABLE IF NOT EXISTS ekstrakurikuler (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama_ekstra VARCHAR(100),
+    jadwal VARCHAR(20),
+	guru_pengajar VARCHAR (100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL
+)";
+
+
 $koneksi->query($sql);
 $koneksi->query($sql2);
 $koneksi->query($sql3);
+$koneksi->query($sql4);
+$koneksi->query($sql5);
 ?>

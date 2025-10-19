@@ -8,7 +8,7 @@ $d = mysqli_fetch_array($data);
 <html>
 <head>
     <title>Edit Jurusan</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
 <h2>Edit Data Jurusan</h2>
