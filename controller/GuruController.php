@@ -24,9 +24,11 @@ class GuruController {
         $stmt = $this->koneksi->prepare("INSERT INTO guru (nip, nama, mapel) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $data['nip'], $data['nama'], $data['mapel']);
         
-        if($stmt->execute()) {
-            echo "<script>alert('Data berhasil ditambahkan!');window.location='index.php';</script>";
-            return true;
+        if ($stmt->execute()) {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['flash_message'] = 'Data berhasil ditambahkan!';
+            header('Location: index.php');
+            exit;
         }
         return false;
     }
@@ -36,9 +38,11 @@ class GuruController {
         $stmt = $this->koneksi->prepare("UPDATE guru SET nip = ?, nama = ?, mapel = ? WHERE id = ?");
         $stmt->bind_param("sssi", $data['nip'], $data['nama'], $data['mapel'], $id);
         
-        if($stmt->execute()) {
-            echo "<script>alert('Data berhasil diupdate');window.location='index.php';</script>";
-            return true;
+        if ($stmt->execute()) {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['flash_message'] = 'Data berhasil diupdate!';
+            header('Location: index.php');
+            exit;
         }
         return false;
     }
@@ -49,9 +53,11 @@ class GuruController {
         $stmt = $this->koneksi->prepare("UPDATE guru SET deleted_at = NOW(), updated_at = updated_at WHERE id = ?");
         $stmt->bind_param("i", $id);
         
-        if($stmt->execute()) {
-            echo "<script>alert('Data berhasil dihapus');window.location='index.php';</script>";
-            return true;
+        if ($stmt->execute()) {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['flash_message'] = 'Data berhasil dihapus!';
+            header('Location: index.php');
+            exit;
         }
         return false;
     }

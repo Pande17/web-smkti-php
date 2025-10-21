@@ -35,7 +35,6 @@
         $siswaController->updateSiswa($id, $data);
         exit;
     }
-
 ?>
 <!DOCTYPE html>
 <html>

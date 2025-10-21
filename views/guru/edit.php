@@ -1,26 +1,39 @@
 <?php
     include '../../config/koneksi.php';
     require_once '../../controller/GuruController.php';
-    session_start();
+    require_once __DIR__ . '/../../auth/check_auth.php';
 
     $guruController = new GuruController($koneksi);
 
-    if(isset($_POST['update'])) {
-        $id = $_POST['id'];
-        $data = [
-            'nip' => $_POST['nip'],
-            'nama' => $_POST['nama'],
-            'mapel' => $_POST['mapel']
-        ];
-
-        if($guruController->updateGuru($id, $data)) {
-            exit;
-        }
+    // Load existing record
+    $id = intval($_GET['id'] ?? 0);
+    if ($id <= 0) {
+        // jika id tidak valid, kembali ke index
+        header('Location: index.php');
+        exit;
+    }
+    
+    $guru = $guruController->getGuruById($id);
+    if (!$guru) {
+        // record tidak ditemukan
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        $_SESSION['flash_message'] = 'Data tidak ditemukan.';
+        header('Location: index.php');
+        exit;
     }
 
-    // Get guru data
-    $id = $_GET['id'];
-    $guru = $guruController->getGuruById($id);
+    // Handle update submission
+    if (isset($_POST['update'])) {
+        $id = intval($_POST['id'] ?? 0);
+        $data = [
+            'nip'     => trim($_POST['nip'] ?? ''),
+            'nama'    => trim($_POST['nama'] ?? ''),
+            'mapel'   => trim($_POST['mapel'] ?? '')
+        ];
+    
+        $guruController->updateGuru($id, $data);
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -44,11 +57,11 @@
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="../siswa/" class="nav-item active">
+            <a href="../siswa/" class="nav-item">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="../guru/" class="nav-item ">
+            <a href="../guru/" class="nav-item active">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>
@@ -96,6 +109,7 @@
                 <label>Mata Pelajaran:</label>
                 <input type="text" name="mapel" value="<?= $guru['mapel']; ?>" required>
 
+                <a href="index.php" class="btn btn-secondary">Batal</a>
                 <input type="submit" name="update" value="Update Data">
             </form>
         </div>

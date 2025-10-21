@@ -21,9 +21,11 @@ class EkstrakurikulerController {
         $stmt = $this->koneksi->prepare("INSERT INTO ekstrakurikuler (nama_ekskul, pembina, hari, waktu) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $data['nama_ekskul'], $data['pembina'], $data['hari'], $data['waktu']);
         
-        if($stmt->execute()) {
-            echo "<script>alert('Data berhasil ditambahkan!');window.location='index.php';</script>";
-            return true;
+        if ($stmt->execute()) {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['flash_message'] = 'Data berhasil ditambahkan!';
+            header('Location: index.php');
+            exit;
         }
         return false;
     }

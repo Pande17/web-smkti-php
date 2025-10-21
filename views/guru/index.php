@@ -1,7 +1,7 @@
 <?php
     include '../../config/koneksi.php';
     require_once '../../controller/GuruController.php';
-    session_start();
+    require_once __DIR__ . '/../../auth/check_auth.php';
 
     $guruController = new GuruController($koneksi);
 
@@ -34,11 +34,11 @@
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="../siswa/" class="nav-item active">
+            <a href="../siswa/" class="nav-item">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="../guru/" class="nav-item ">
+            <a href="../guru/" class="nav-item active">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>
@@ -77,6 +77,10 @@
                 <span>Tambah Guru</span>
             </a>
         </div>
+        <?php
+            // include flash reusable
+            require_once __DIR__ . '/../../includes/flash.php';
+        ?>
         <table>
         <tr>
             <th>No</th>

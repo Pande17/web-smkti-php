@@ -1,21 +1,21 @@
 <?php
-include '../../config/koneksi.php';
-require_once '../../controller/GuruController.php';
-session_start();
+    include '../../config/koneksi.php';
+    require_once '../../controller/GuruController.php';
+    require_once __DIR__ . '/../../auth/check_auth.php';
 
-$guruController = new GuruController($koneksi);
-
-if(isset($_POST['simpan'])){
-    $data = [
-        'nip' => $_POST['nip'],
-        'nama' => $_POST['nama'],
-        'mapel' => $_POST['mapel']
-    ];
-
-    if($guruController->createGuru($data)) {
-        exit;
+    $guruController = new GuruController($koneksi);
+    
+    if(isset($_POST['simpan'])){
+        $data = [
+            'nip' => $_POST['nip'],
+            'nama' => $_POST['nama'],
+            'mapel' => $_POST['mapel']
+        ];
+    
+        if($guruController->createGuru($data)) {
+            exit;
+        }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -40,11 +40,11 @@ if(isset($_POST['simpan'])){
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="../siswa/" class="nav-item active">
+            <a href="../siswa/" class="nav-item">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="../guru/" class="nav-item ">
+            <a href="../guru/" class="nav-item active">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>

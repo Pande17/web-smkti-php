@@ -21,9 +21,11 @@ class MataPelajaranController {
         $stmt = $this->koneksi->prepare("INSERT INTO mata_pelajaran (kode, nama_mapel, kelas) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $data['kode'], $data['nama_mapel'], $data['kelas']);
         
-        if($stmt->execute()) {
-            echo "<script>alert('Data berhasil ditambahkan!');window.location='index.php';</script>";
-            return true;
+        if ($stmt->execute()) {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['flash_message'] = 'Data berhasil ditambahkan!';
+            header('Location: index.php');
+            exit;
         }
         return false;
     }

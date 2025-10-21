@@ -1,22 +1,22 @@
 <?php
-include '../../config/koneksi.php';
-require_once '../../controller/SiswaController.php';
-require_once __DIR__ . '/../../auth/check_auth.php';
+    include '../../config/koneksi.php';
+    require_once '../../controller/SiswaController.php';
+    require_once __DIR__ . '/../../auth/check_auth.php';
 
-$siswaController = new SiswaController($koneksi);
+    $siswaController = new SiswaController($koneksi);
 
-if(isset($_POST['simpan'])){
-    $data = [
-        'nis' => $_POST['nis'],
-        'nama' => $_POST['nama'],
-        'kelas' => $_POST['kelas'],
-        'jurusan' => $_POST['jurusan']
-    ];
+    if(isset($_POST['simpan'])){
+        $data = [
+            'nis' => $_POST['nis'],
+            'nama' => $_POST['nama'],
+            'kelas' => $_POST['kelas'],
+            'jurusan' => $_POST['jurusan']
+        ];
 
-    if($siswaController->createSiswa($data)) {
-        exit;
+        if($siswaController->createSiswa($data)) {
+            exit;
+        }
     }
-}
 ?>
 
 <!DOCTYPE html>
