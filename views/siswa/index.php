@@ -1,23 +1,15 @@
 <?php
     include '../../config/koneksi.php'; 
-    session_start(); 
+    require_once '../../controller/SiswaController.php';
+    require_once __DIR__ . '/../../auth/check_auth.php';
 
-    // soft delete
+    $siswaController = new SiswaController($koneksi);
+
+    // Handle soft delete action
     if(isset($_GET['hapus'])) {
-        $id = intval($_GET['hapus']);
-        $timestamp = date('Y-m-d H:i:s');
-        $stmt = $koneksi->prepare("UPDATE siswa SET deleted_at = ? WHERE id = ?");
-        $stmt->bind_param("si", $timestamp, $id);
-        if($stmt->execute()) {
-            $_SESSION['message'] = "Data Berhasil Dihapus!";
-            header("Location: index.php");
-            exit;
-        }
-        $stmt->close();
+        $siswaController->hapusSiswa($_GET['hapus']);
+        exit;
     }
-
-    // Ambil data siswa yang belum dihapus (deleted_at IS NULL)
-    // $result = $koneksi->query("SELECT * FROM siswa WHERE deleted_at IS NULL ORDER BY id ASC");
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,11 +33,11 @@
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="." class="nav-item active">
+            <a href="../siswa/" class="nav-item active">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="../guru/" class="nav-item">
+            <a href="../guru/" class="nav-item ">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>
@@ -68,7 +60,7 @@
                 <i class="fas fa-user-circle"></i>
                 <span><?= htmlspecialchars($_SESSION['username']) ?></span>
             </div>
-            <a href="auth/logout.php" class="logout-btn">
+            <a href="../../auth/logout.php" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>
@@ -85,33 +77,10 @@
                 <span>Tambah Siswa</span>
             </a>
         </div>
-
-        <?php if(isset($_SESSION['message'])): ?>
-            <div id="notification" class="popup-container">
-                <div class="popup-notification">
-                    <div class="success-icon">✓</div>
-                    <?= $_SESSION['message']; ?>
-                </div>
-            </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const notification = document.getElementById('notification');
-
-                    // Show notification
-                    notification.classList.add('show');
-
-                    // Hide notification after 3 seconds
-                    setTimeout(function() {
-                        notification.classList.remove('show');
-                        // Remove element after animation
-                        setTimeout(() => notification.remove(), 300);
-                    }, 3000);
-                });
-            </script>
-            <?php unset($_SESSION['message']); ?>
-        <?php endif; ?>
-            
-            
+        <?php
+            // include flash reusable
+            require_once __DIR__ . '/../../includes/flash.php';
+        ?>
         <table>
         <tr>
             <th>No</th>
@@ -122,9 +91,10 @@
             <th>Aksi</th>
         </tr>
         <?php
-            $no = 1;
-            $data = mysqli_query($koneksi, "SELECT * FROM siswa WHERE deleted_at IS NULL ORDER BY id ASC");
-            while($d = mysqli_fetch_array($data)){
+            $no = 1; // memulai nomor urut
+            // gunakan controller untuk mengambil data
+            $data = $siswaController->getAllSiswa();
+            while($d = mysqli_fetch_array($data)){  
         ?>
         <tr>
             <td><?= $no++; ?></td>

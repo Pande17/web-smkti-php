@@ -29,9 +29,9 @@ if(isset($_POST['simpan'])){
 <body class="with-sidebar">
     <aside class="sidebar">
         <div class="sidebar-header">
-            <!-- <div class="logo">
+            <div class="logo">
                 <i class="fas fa-school" style="color: #ffff;"></i>
-            </div> -->
+            </div>
             <h1>Data Sekolah</h1>
         </div>
 
@@ -40,23 +40,23 @@ if(isset($_POST['simpan'])){
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="../siswa/" class="nav-item">
+            <a href="../siswa/" class="nav-item active">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="views/guru/" class="nav-item active">
+            <a href="../guru/" class="nav-item ">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>
-            <a href="views/jurusan/" class="nav-item">
+            <a href="../jurusan/" class="nav-item">
                 <i class="fas fa-book"></i>
                 <span>Data Jurusan</span>
             </a>
-            <a href="views/mata_pelajaran/" class="nav-item">
+            <a href="../mata_pelajaran/" class="nav-item">
                 <i class="fas fa-book-open"></i>
                 <span>Data Mata Pelajaran</span>
             </a>
-            <a href="views/ekstrakurikuler/" class="nav-item">
+            <a href="../ekstrakurikuler/" class="nav-item">
                 <i class="fas fa-running"></i>
                 <span>Data Ekstrakurikuler</span>
             </a>
@@ -67,7 +67,7 @@ if(isset($_POST['simpan'])){
                 <i class="fas fa-user-circle"></i>
                 <span><?= htmlspecialchars($_SESSION['username']) ?></span>
             </div>
-            <a href="auth/logout.php" class="logout-btn">
+            <a href="../../auth/logout.php" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>

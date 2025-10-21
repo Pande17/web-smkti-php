@@ -40,9 +40,23 @@ class UserController {
     }
 
     public function logout() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // hapus session
+        $_SESSION = [];
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
         session_destroy();
-        header("Location: index.php");
+
+        // redirect ke index root project (gunakan BASE_URL jika tersedia)
+        $redirect = (defined('BASE_URL') ? rtrim(BASE_URL, '/') . '/index.php' : '/index.php');
+        header('Location: ' . $redirect);
         exit();
     }
 }

@@ -10,6 +10,11 @@ if ($koneksi->connect_error) {
     die("Koneksi gagal: " . $koneksi->connect_error);
 }
 
+// base url (sesuai dengan folder project di webroot)
+if (!defined('BASE_URL')) {
+    define('BASE_URL', '/data-sekolah');
+}
+
 // Membuat database jika belum ada
 $koneksi->query("CREATE DATABASE IF NOT EXISTS `$db`");
 

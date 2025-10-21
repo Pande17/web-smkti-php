@@ -1,26 +1,26 @@
 <?php
-include '../../config/koneksi.php';
-require_once '../../controller/GuruController.php';
-session_start();
+    include '../../config/koneksi.php';
+    require_once '../../controller/GuruController.php';
+    session_start();
 
-$guruController = new GuruController($koneksi);
+    $guruController = new GuruController($koneksi);
 
-if(isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $data = [
-        'nip' => $_POST['nip'],
-        'nama' => $_POST['nama'],
-        'mapel' => $_POST['mapel']
-    ];
+    if(isset($_POST['update'])) {
+        $id = $_POST['id'];
+        $data = [
+            'nip' => $_POST['nip'],
+            'nama' => $_POST['nama'],
+            'mapel' => $_POST['mapel']
+        ];
 
-    if($guruController->updateGuru($id, $data)) {
-        exit;
+        if($guruController->updateGuru($id, $data)) {
+            exit;
+        }
     }
-}
 
-// Get guru data
-$id = $_GET['id'];
-$guru = $guruController->getGuruById($id);
+    // Get guru data
+    $id = $_GET['id'];
+    $guru = $guruController->getGuruById($id);
 ?>
 
 <!DOCTYPE html>
@@ -39,40 +39,38 @@ $guru = $guruController->getGuruById($id);
             </div>
             <h1>Data Sekolah</h1>
         </div>
-
         <nav class="sidebar-nav">
-            <a href="dashboard.php" class="nav-item">
+            <a href="../../dashboard.php" class="nav-item">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="views/siswa/" class="nav-item">
+            <a href="../siswa/" class="nav-item active">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="." class="nav-item active">
+            <a href="../guru/" class="nav-item ">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>
-            <a href="views/jurusan/" class="nav-item">
+            <a href="../jurusan/" class="nav-item">
                 <i class="fas fa-book"></i>
                 <span>Data Jurusan</span>
             </a>
-            <a href="views/mata_pelajaran/" class="nav-item">
+            <a href="../mata_pelajaran/" class="nav-item">
                 <i class="fas fa-book-open"></i>
                 <span>Data Mata Pelajaran</span>
             </a>
-            <a href="views/ekstrakurikuler/" class="nav-item">
+            <a href="../ekstrakurikuler/" class="nav-item">
                 <i class="fas fa-running"></i>
                 <span>Data Ekstrakurikuler</span>
             </a>
         </nav>
-
         <div class="sidebar-footer">
             <div class="user-info">
                 <i class="fas fa-user-circle"></i>
                 <span><?= htmlspecialchars($_SESSION['username']) ?></span>
             </div>
-            <a href="auth/logout.php" class="logout-btn">
+            <a href="../../auth/logout.php" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>

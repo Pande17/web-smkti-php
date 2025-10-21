@@ -34,11 +34,11 @@
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="../siswa/" class="nav-item">
+            <a href="../siswa/" class="nav-item active">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="." class="nav-item active">
+            <a href="../guru/" class="nav-item ">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>
@@ -61,7 +61,7 @@
                 <i class="fas fa-user-circle"></i>
                 <span><?= htmlspecialchars($_SESSION['username']) ?></span>
             </div>
-            <a href="auth/logout.php" class="logout-btn">
+            <a href="../../auth/logout.php" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>

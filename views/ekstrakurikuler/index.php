@@ -33,11 +33,11 @@
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="../siswa/" class="nav-item">
+            <a href="../siswa/" class="nav-item active">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="../guru/" class="nav-item">
+            <a href="../guru/" class="nav-item ">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>
@@ -49,7 +49,7 @@
                 <i class="fas fa-book-open"></i>
                 <span>Data Mata Pelajaran</span>
             </a>
-            <a href="." class="nav-item active">
+            <a href="../ekstrakurikuler/" class="nav-item">
                 <i class="fas fa-running"></i>
                 <span>Data Ekstrakurikuler</span>
             </a>

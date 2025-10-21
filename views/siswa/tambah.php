@@ -1,7 +1,7 @@
 <?php
 include '../../config/koneksi.php';
 require_once '../../controller/SiswaController.php';
-session_start();
+require_once __DIR__ . '/../../auth/check_auth.php';
 
 $siswaController = new SiswaController($koneksi);
 
@@ -9,7 +9,8 @@ if(isset($_POST['simpan'])){
     $data = [
         'nis' => $_POST['nis'],
         'nama' => $_POST['nama'],
-        'mapel' => $_POST['mapel']
+        'kelas' => $_POST['kelas'],
+        'jurusan' => $_POST['jurusan']
     ];
 
     if($siswaController->createSiswa($data)) {
@@ -67,7 +68,7 @@ if(isset($_POST['simpan'])){
                 <i class="fas fa-user-circle"></i>
                 <span><?= htmlspecialchars($_SESSION['username']) ?></span>
             </div>
-            <a href="auth/logout.php" class="logout-btn">
+            <a href="../../auth/logout.php" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>
