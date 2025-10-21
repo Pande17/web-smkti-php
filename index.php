@@ -57,13 +57,12 @@
                     <input id="password" name="password" type="password" placeholder="Password" required />
                 </div>
 
-                <div class="actions">
-                    <a class="muted-link" href="#">Lupa password?</a>
-                    <button class="btn" type="submit">Masuk</button>
+                <div class="button-group">
+                    <!-- <a class="muted-link" href="#">Lupa password?</a> -->
+                    <button type="submit" class="btn btn-primary">Masuk</button>
                 </div>
             </form>
         </main>
-    <?php require_once __DIR__ . '../../../includes/scripts.php'; ?>
     </div>
 </body>
 </html>
