@@ -83,28 +83,27 @@
         
         <div class="content-body">
             <form method="post">
-                <table>
-                    <tr>
-                        <td>NIP</td>
-                        <td><input type="text" name="nip" required></td>
-                    </tr>
-                    <tr>
-                        <td>Nama</td>
-                        <td><input type="text" name="nama" required></td>
-                    </tr>
-                    <tr>
-                        <td>Mata Pelajaran</td>
-                        <td><input type="text" name="mapel" required></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="form-actions">
-                            <a href="index.php" class="btn btn-secondary">Batal</a>
-                            <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
-                        </td>
-                    </tr>
-                </table>
+                <div class="form-group">
+                    <label>NIP</label>
+                    <input type="text" name="nip" required>
+                </div>
+                <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" name="nama" required>
+                </div>
+                <div class="form-group">
+                    <label>Mata Pelajaran</label>
+                    <input type="text" name="mata_pelajaran" required>
+                </div>
+                <div class="form-actions">
+                    <div class="button-group">
+                        <a href="index.php" class="btn btn-secondary">Batal</a>
+                        <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
             </form>
         </div>
     </main>
+    <?php require_once __DIR__ . '../../../includes/scripts.php'; ?>
 </body>
 </html>

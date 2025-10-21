@@ -75,7 +75,7 @@
             <button class="sidebar-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <h2>Edit Data Jurusan</h2>
+            <h2>Tambah Data Jurusan</h2>
         </header>
         <div class="content-body">
             <form method="post">
@@ -96,5 +96,6 @@
             </form>
         </div>
     </main>
+    <?php require_once __DIR__ . '../../../includes/scripts.php'; ?>
 </body>
 </html>

@@ -98,21 +98,28 @@
         </header>
         <div class="content-body">
             <form method="post">
-                <input type="hidden" name="id" value="<?= $guru['id']; ?>">
-
-                <label>NIP:</label>
-                <input type="text" name="nip" value="<?= $guru['nip']; ?>" required>
-
-                <label>Nama:</label>
-                <input type="text" name="nama" value="<?= $guru['nama']; ?>" required>
-
-                <label>Mata Pelajaran:</label>
-                <input type="text" name="mapel" value="<?= $guru['mapel']; ?>" required>
-
-                <a href="index.php" class="btn btn-secondary">Batal</a>
-                <input type="submit" name="update" value="Update Data">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($guru['id']) ?>">
+                <div class="form-group">
+                    <label>NIS</label>
+                    <input type="text" name="nip" value="<?= htmlspecialchars($guru['nip'] ?? '') ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" name="nama" value="<?= htmlspecialchars($guru['nama'] ?? '') ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Jurusan</label>
+                    <input type="text" name="mapel" value="<?= htmlspecialchars($guru['mapel'] ?? '') ?>" required>
+                </div>
+                <div class="form-actions">
+                    <div class="button-group">
+                        <a href="index.php" class="btn btn-secondary">Batal</a>
+                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                    </div>
+                 </div>
             </form>
         </div>
     </main>
+    <?php require_once __DIR__ . '../../../includes/scripts.php'; ?>
 </body>
 </html>

@@ -1,10 +1,39 @@
 <?php
-require_once __DIR__ . '/auth/check_auth.php';
-if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php');
-    exit;
-}
+    include 'config/koneksi.php'; 
+    require_once 'controller/SiswaController.php';
+    require_once 'auth/check_auth.php';
+    
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: index.php');
+        exit;
+    }
+
+    // hitung jumlah record tiap tabel untuk card statistik di dashboard 
+    $counts = [
+        'siswa' => 0,
+        'guru' => 0,
+        'jurusan' => 0,
+        'mata_pelajaran' => 0,
+        'ekstrakurikuler' => 0,
+        'users' => 0
+    ];
+
+    $tables = array_keys($counts);
+    foreach ($tables as $t) {
+        $sql = "SELECT COUNT(*) AS c FROM {$t} WHERE deleted_at IS NULL";
+        // users mungkin tidak punya deleted_at column — tangani fallback
+        if ($t === 'users') {
+            $sql = "SELECT COUNT(*) AS c FROM users";
+        }
+        $res = $koneksi->query($sql);
+        if ($res) {
+            $row = $res->fetch_assoc();
+            $counts[$t] = isset($row['c']) ? (int)$row['c'] : 0;
+            $res->free();
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -73,25 +102,63 @@ if (!isset($_SESSION['user_id'])) {
         
         <div class="content-body">
             <h3>Selamat Datang di Sistem Informasi Sekolah</h3>
-            <!-- Add more content here -->
+
+            <!-- Statistik cards grid -->
+            <div class="stats-grid" role="list">
+                <a href="views/siswa/" class="stat-link">
+                <div class="stat-card" role="listitem">
+                    <div class="stat-icon bg-blue"><i class="fas fa-user-graduate"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-title">Siswa</div>
+                        <div class="stat-number"><?= number_format($counts['siswa']); ?></div>
+                    </div>
+                </div>
+                </a>
+
+                <a href="views/guru/" class="stat-link">
+                <div class="stat-card" role="listitem">
+                    <div class="stat-icon bg-indigo"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-title">Guru</div>
+                        <div class="stat-number"><?= number_format($counts['guru']); ?></div>
+                    </div>
+                </div>
+                </a>
+
+                <a href="views/jurusan" class="stat-link">
+                <div class="stat-card" role="listitem">
+                    <div class="stat-icon bg-teal"><i class="fas fa-book"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-title">Jurusan</div>
+                        <div class="stat-number"><?= number_format($counts['jurusan']); ?></div>
+                    </div>
+                </div>
+                </a>
+
+                <a href="views/mata_pelajaran" class="stat-link">
+                <div class="stat-card" role="listitem">
+                    <div class="stat-icon bg-cyan"><i class="fas fa-book-open"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-title">Mata Pelajaran</div>
+                        <div class="stat-number"><?= number_format($counts['mata_pelajaran']); ?></div>
+                    </div>
+                </div>
+                </a>
+
+                <a href="views/ekstrakurikuler" class="stat-link">
+                <div class="stat-card" role="listitem">
+                    <div class="stat-icon bg-emerald"><i class="fas fa-running"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-title">Ekstrakurikuler</div>
+                        <div class="stat-number"><?= number_format($counts['ekstrakurikuler']); ?></div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <!-- end stats -->
+
         </div>
     </main>
-    <script>
-        document.querySelector('.sidebar-toggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('active');
-        });
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            const sidebar = document.querySelector('.sidebar');
-            const toggle = document.querySelector('.sidebar-toggle');
-            
-            if (window.innerWidth <= 768) {
-                if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
-                    sidebar.classList.remove('active');
-                }
-            }
-        });
-    </script>
+    <?php require_once __DIR__ . '/includes/scripts.php'; ?>
 </body>
 </html>

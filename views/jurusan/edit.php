@@ -116,5 +116,6 @@
             </form>
         </div>
     </main>
+    <?php require_once __DIR__ . '../../../includes/scripts.php'; ?>
 </body>
 </html>

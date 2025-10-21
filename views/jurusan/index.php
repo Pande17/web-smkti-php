@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Mata Pelajaran - SMK TI Bali Global Denpasar</title>
+    <title>Data Jurusan - SMK TI Bali Global Denpasar</title>
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
@@ -105,5 +105,6 @@
         <?php } ?>
         </table>
     </main>
+    <?php require_once __DIR__ . '../../../includes/scripts.php'; ?>
 </body>
 </html>
