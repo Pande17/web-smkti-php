@@ -18,12 +18,12 @@ class EkstrakurikulerController {
     }
 
     public function createEkstrakurikuler($data) {
-        $stmt = $this->koneksi->prepare("INSERT INTO ekstrakurikuler (nama_ekskul, pembina, hari, waktu) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $data['nama_ekskul'], $data['pembina'], $data['hari'], $data['waktu']);
+        $stmt = $this->koneksi->prepare("INSERT INTO ekstrakurikuler (nama_ekstra, jadwal, guru_pengajar) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $data['nama_ekstra'], $data['jadwal'], $data['guru_pengajar']);
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data berhasil ditambahkan!';
+            $_SESSION['flash_message'] = 'Data Ekstrakurikuler berhasil ditambahkan!';
             header('Location: index.php');
             exit;
         }
@@ -31,12 +31,14 @@ class EkstrakurikulerController {
     }
 
     public function updateEkstrakurikuler($id, $data) {
-        $stmt = $this->koneksi->prepare("UPDATE ekstrakurikuler SET nama_ekskul = ?, pembina = ?, hari = ?, waktu = ? WHERE id = ?");
-        $stmt->bind_param("ssssi", $data['nama_ekskul'], $data['pembina'], $data['hari'], $data['waktu'], $id);
+        $stmt = $this->koneksi->prepare("UPDATE ekstrakurikuler SET nama_ekstra = ?, jadwal = ?, guru_pengajar = ? WHERE id = ?");
+        $stmt->bind_param("sssi", $data['nama_ekstra'], $data['jadwal'], $data['guru_pengajar'], $id);
         
-        if($stmt->execute()) {
-            echo "<script>alert('Data berhasil diupdate');window.location='index.php';</script>";
-            return true;
+        if ($stmt->execute()) {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['flash_message'] = 'Data Ekstrakurikuler berhasil diupdate!';
+            header('Location: index.php');
+            exit;
         }
         return false;
     }
@@ -45,9 +47,11 @@ class EkstrakurikulerController {
         $stmt = $this->koneksi->prepare("UPDATE ekstrakurikuler SET deleted_at = NOW(), updated_at = updated_at WHERE id = ?");
         $stmt->bind_param("i", $id);
         
-        if($stmt->execute()) {
-            echo "<script>alert('Data berhasil dihapus');window.location='index.php';</script>";
-            return true;
+        if ($stmt->execute()) {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['flash_message'] = 'Data Ekstrakurikuler berhasil dihapus!';
+            header('Location: index.php');
+            exit;
         }
         return false;
     }

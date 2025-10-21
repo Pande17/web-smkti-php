@@ -1,15 +1,16 @@
 <?php
     include '../../config/koneksi.php';
     require_once '../../controller/EkstrakurikulerController.php';
-    session_start();
+    require_once __DIR__ . '/../../auth/check_auth.php';
 
-    $ekskulController = new EkstrakurikulerController($koneksi);
+    $ekstrakurikulerController = new EkstrakurikulerController($koneksi);
 
     if(isset($_GET['hapus'])) {
-        $ekskulController->hapusEkstrakurikuler($_GET['hapus']);
+        $ekstrakurikulerController->hapusEkstrakurikuler($_GET['hapus']);
         exit;
     }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="../siswa/" class="nav-item active">
+            <a href="../siswa/" class="nav-item">
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
@@ -49,7 +50,7 @@
                 <i class="fas fa-book-open"></i>
                 <span>Data Mata Pelajaran</span>
             </a>
-            <a href="../ekstrakurikuler/" class="nav-item">
+            <a href="../ekstrakurikuler/" class="nav-item active">
                 <i class="fas fa-running"></i>
                 <span>Data Ekstrakurikuler</span>
             </a>
@@ -69,66 +70,42 @@
 
     <main class="content">
         <div class="content-header">
-            <button class="sidebar-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <h2>Data Ekstrakurikuler</h2>
-            <a href="tambah.php" class="btn btn-primary">
+            <h1>Data Ekstrakurikuler</h1>
+            <a href="tambah.php" class="btn">
                 <i class="fas fa-plus"></i>
                 <span>Tambah Ekstrakurikuler</span>
             </a>
-        </div>
 
-        <div class="table-responsive">
-            <table>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Ekstrakurikuler</th>
-                    <th>Pembina</th>
-                    <th>Hari</th>
-                    <th>Waktu</th>
-                    <th>Aksi</th>
-                </tr>
-                <?php
-                    $no = 1;
-                    $data = $ekskulController->getAllEkstrakurikuler();
-                    while($d = mysqli_fetch_array($data)){
-                ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td><?= htmlspecialchars($d['nama_ekskul']); ?></td>
-                    <td><?= htmlspecialchars($d['pembina']); ?></td>
-                    <td><?= htmlspecialchars($d['hari']); ?></td>
-                    <td><?= htmlspecialchars($d['waktu']); ?></td>
-                    <td>
-                        <a href="edit.php?id=<?= $d['id']; ?>" class="btn btn-primary">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="index.php?hapus=<?= $d['id']; ?>" class="btn btn-danger" 
-                           onclick="return confirm('Yakin hapus data?')">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <?php } ?>
-            </table>
         </div>
+        <?php
+            require_once __DIR__ . '/../../includes/flash.php';
+        ?>
+        <table>
+        <tr>
+            <th>No</th>
+            <th>Nama Ekstrakurikuler</th>
+            <th>Jadwal</th>
+            <th>Guru Pengajar</th>
+            <th>Aksi</th>
+        </tr>
+        <?php
+            $no = 1;
+            $data = $ekstrakurikulerController->getAllEkstrakurikuler();
+            while($d = mysqli_fetch_array($data)){
+        ?>
+        <tr>
+            <td><?= $no++; ?></td>
+            <td><?= $d['nama_ekstra']; ?></td>
+            <td><?= $d['jadwal']; ?></td>
+            <td><?= $d['guru_pengajar']; ?></td>
+            <td>
+                <a href="edit.php?id=<?= $d['id']; ?>" class="btn">Edit</a>
+                <a href="index.php?hapus=<?= $d['id']; ?>" class="btn btn-danger" 
+                   onclick="return confirm('Yakin hapus data?')">Hapus</a>
+            </td>
+        </tr>
+        <?php } ?>
+        </table>
     </main>
-
-    <script>
-        const sidebar = document.querySelector('.sidebar');
-        const overlay = document.querySelector('.sidebar-overlay');
-        const toggleBtn = document.querySelector('.sidebar-toggle');
-
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-    </script>
 </body>
 </html>
