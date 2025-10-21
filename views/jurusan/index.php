@@ -1,4 +1,16 @@
-<?php include '../../config/koneksi.php'; ?>
+<?php
+    include '../../config/koneksi.php';
+    require_once '../../controller/JurusanController.php';
+    require_once __DIR__ . '/../../auth/check_auth.php';
+
+    $jurusanController = new JurusanController($koneksi);
+
+    if(isset($_GET['hapus'])) {
+        $jurusanController->hapusJurusan($_GET['hapus']);
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,6 +77,9 @@
             </a>
 
         </div>
+        <?php
+            require_once __DIR__ . '/../../includes/flash.php';
+        ?>
         <table>
         <tr>
             <th>No</th>
@@ -73,9 +88,9 @@
             <th>Aksi</th>
         </tr>
         <?php
-        $no = 1;
-        $data = mysqli_query($koneksi, "SELECT * FROM jurusan");
-        while($d = mysqli_fetch_array($data)){
+            $no = 1;
+            $data = $jurusanController->getAllJurusan();
+            while($d = mysqli_fetch_array($data)){
         ?>
         <tr>
             <td><?= $no++; ?></td>

@@ -23,7 +23,7 @@ class SiswaController {
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data berhasil ditambahkan!';
+            $_SESSION['flash_message'] = 'Data siswa berhasil ditambahkan!';
             header('Location: index.php');
             exit;
         }
@@ -44,7 +44,7 @@ class SiswaController {
         $stmt->bind_param("ssssi", $data['nis'], $data['nama'], $data['kelas'], $data['jurusan'], $id);
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data berhasil diupdate!';
+            $_SESSION['flash_message'] = 'Data siswa berhasil diupdate!';
             header('Location: index.php');
             exit;
         }
@@ -58,7 +58,7 @@ class SiswaController {
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data berhasil dihapus!';
+            $_SESSION['flash_message'] = 'Data siswa berhasil dihapus!';
             header('Location: index.php');
             exit;
         }
