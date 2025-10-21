@@ -34,12 +34,14 @@ $guru = $guruController->getGuruById($id);
 <body class="with-sidebar">
     <aside class="sidebar">
         <div class="sidebar-header">
-            <!-- <div class="logo">DS</div> -->
+            <div class="logo">
+                <i class="fas fa-school" style="color: #ffff;"></i>
+            </div>
             <h1>Data Sekolah</h1>
         </div>
 
         <nav class="sidebar-nav">
-            <a href="dashboard.php" class="nav-item active">
+            <a href="dashboard.php" class="nav-item">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
@@ -47,7 +49,7 @@ $guru = $guruController->getGuruById($id);
                 <i class="fas fa-user-graduate"></i>
                 <span>Data Siswa</span>
             </a>
-            <a href="views/guru/" class="nav-item">
+            <a href="." class="nav-item active">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Data Guru</span>
             </a>
@@ -83,22 +85,22 @@ $guru = $guruController->getGuruById($id);
             </button>
             <h2>Edit Data Guru</h2>
         </header>
-        
         <div class="content-body">
-<form method="post">
-    <input type="hidden" name="id" value="<?= $guru['id']; ?>">
-    
-    <label>NIP:</label>
-    <input type="text" name="nip" value="<?= $guru['nip']; ?>" required>
+            <form method="post">
+                <input type="hidden" name="id" value="<?= $guru['id']; ?>">
 
-    <label>Nama:</label>
-    <input type="text" name="nama" value="<?= $guru['nama']; ?>" required>
+                <label>NIP:</label>
+                <input type="text" name="nip" value="<?= $guru['nip']; ?>" required>
 
-    <label>Mata Pelajaran:</label>
-    <input type="text" name="mapel" value="<?= $guru['mapel']; ?>" required>
+                <label>Nama:</label>
+                <input type="text" name="nama" value="<?= $guru['nama']; ?>" required>
 
-    <input type="submit" name="update" value="Update Data">
-</form>
+                <label>Mata Pelajaran:</label>
+                <input type="text" name="mapel" value="<?= $guru['mapel']; ?>" required>
 
+                <input type="submit" name="update" value="Update Data">
+            </form>
+        </div>
+    </main>
 </body>
 </html>

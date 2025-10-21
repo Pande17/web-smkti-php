@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/auth/check_auth.php';
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit;
@@ -18,7 +18,9 @@ if (!isset($_SESSION['user_id'])) {
 <body class="with-sidebar">
     <aside class="sidebar">
         <div class="sidebar-header">
-            <!-- <div class="logo">DS</div> -->
+            <div class="logo">
+                <i class="fas fa-school" style="color: #ffff;"></i>
+            </div>
             <h1>Data Sekolah</h1>
         </div>
 

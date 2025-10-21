@@ -368,23 +368,31 @@ header h2 {
 
 /* Form Styles */
 .form-group {
-	margin-bottom: 20px;
+	margin-bottom: 24px;
+	max-width: 800px; /* Increased from 500px */
+	margin-left: auto;
+	margin-right: auto;
 }
 
-form {
-	max-width: 600px;
-	margin: 0 auto;
-	background: var(--card);
-	padding: 24px;
-	border-radius: var(--radius);
-	border: 1px solid rgba(255, 255, 255, 0.04);
+.form-actions {
+	max-width: 800px;
+	margin: 32px auto 0;
+	display: flex;
+	justify-content: flex-end;
 }
 
-form label {
-	display: block;
-	margin-bottom: 8px;
-	color: var(--muted);
-	font-size: 14px;
+.button-group {
+	display: flex;
+	gap: 12px;
+}
+
+.button-group .btn {
+	min-width: 120px;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
 }
 
 /* Form Input Styles */
@@ -450,35 +458,6 @@ form input[type='submit']:hover {
 
 .back-link i {
 	margin-right: 8px;
-}
-
-/* Form Grid */
-.form-grid {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 5px;
-}
-
-/* Form Action Buttons */
-.form-actions {
-	text-align: center;
-	padding-top: 20px;
-	display: flex;
-	gap: 12px;
-	justify-content: flex-end;
-	max-width: 500px;
-	margin: 0 auto;
-	padding-right: 12px;
-}
-
-.form-actions .btn {
-	min-width: 120px; /* Equal width for both buttons */
-	padding: 12px 24px; /* Increased padding */
-	font-size: 15px; /* Match input font size */
-	height: 45px; /* Fixed height */
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .btn-secondary {
@@ -556,29 +535,19 @@ form input[type='submit']:hover {
 		height: 45px;
 	}
 
-	.form-actions .btn {
-		min-width: 110px;
-		height: 40px;
-		padding: 10px 20px;
-	}
-
-	.form-grid {
-		grid-template-columns: 1fr;
-	}
-
-	form {
-		padding: 20px;
-		margin: 0 15px;
+	.form-group {
+		padding: 0 16px;
+		max-width: 100%;
 	}
 
 	.form-actions {
-		padding-right: 0;
-		justify-content: center; /* Center on mobile */
+		padding: 0 16px;
+		max-width: 100%;
 	}
 
-	.form-actions .btn {
-		min-width: 90px; /* Even smaller on mobile */
-		padding: 8px 12px;
+	.button-group {
+		width: 100%;
+		justify-content: flex-end;
 	}
 }
 

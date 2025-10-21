@@ -29,7 +29,9 @@ if(isset($_POST['simpan'])){
 <body class="with-sidebar">
     <aside class="sidebar">
         <div class="sidebar-header">
-            <!-- <div class="logo">DS</div> -->
+            <!-- <div class="logo">
+                <i class="fas fa-school" style="color: #ffff;"></i>
+            </div> -->
             <h1>Data Sekolah</h1>
         </div>
 
@@ -103,5 +105,6 @@ if(isset($_POST['simpan'])){
                 </table>
             </form>
         </div>
+    </main>
 </body>
 </html>

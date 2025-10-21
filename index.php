@@ -49,7 +49,7 @@
             <form method="post" action="<?=htmlspecialchars($_SERVER['PHP_SELF'])?>" autocomplete="off" novalidate>
                 <div class="field">
                     <label for="username">Username</label>
-                    <input id="username" name="username" type="text" value="<?=htmlspecialchars($old['username'])?>" placeholder="contoh: admin" required />
+                    <input id="username" name="username" type="text" value="<?=htmlspecialchars($old['username'])?>" placeholder="username" required />
                 </div>
 
                 <div class="field">
