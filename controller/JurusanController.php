@@ -26,7 +26,7 @@ class JurusanController {
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data jurusan berhasil ditambahkan!';
+            $_SESSION['flash_message'] = 'Data Jurusan berhasil ditambahkan!';
             header('Location: index.php');
             exit;
         }
@@ -40,7 +40,7 @@ class JurusanController {
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data jurusan berhasil diupdate!';
+            $_SESSION['flash_message'] = 'Data Jurusan berhasil diupdate!';
             header('Location: index.php');
             exit;
         }
@@ -49,12 +49,12 @@ class JurusanController {
 
     // hapus data jurusan (soft delete)
     public function hapusJurusan($id) {
-        $stmt = $this->koneksi->prepare("UPDATE jurusan SET deleted_at = NOW(), updated_at = updated_at WHERE id = ?");
+        $stmt = $this->koneksi->prepare("UPDATE Jurusan SET deleted_at = NOW(), updated_at = updated_at WHERE id = ?");
         $stmt->bind_param("i", $id);
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data jurusan berhasil dihapus!';
+            $_SESSION['flash_message'] = 'Data Jurusan berhasil dihapus!';
             header('Location: index.php');
             exit;
         }

@@ -26,7 +26,7 @@ class GuruController {
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data guru berhasil ditambahkan!';
+            $_SESSION['flash_message'] = 'Data Guru berhasil ditambahkan!';
             header('Location: index.php');
             exit;
         }
@@ -40,7 +40,7 @@ class GuruController {
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data guru berhasil diupdate!';
+            $_SESSION['flash_message'] = 'Data Guru berhasil diupdate!';
             header('Location: index.php');
             exit;
         }
@@ -55,7 +55,7 @@ class GuruController {
         
         if ($stmt->execute()) {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['flash_message'] = 'Data guru berhasil dihapus!';
+            $_SESSION['flash_message'] = 'Data Guru berhasil dihapus!';
             header('Location: index.php');
             exit;
         }
